@@ -1,15 +1,33 @@
 import fs from "fs";
 import path from "path";
-import { config } from "@/config";
 
 export async function getConfig() {
-  // Implementation of the getConfig function
-  const outlineUrl = config.OUTLINE.URL;
-  const outlineApikey = config.OUTLINE.API_KEY;
-  const outlineCollectionid = config.OUTLINE.COLLECTION_ID;
-  const githubRepo = config.GITHUB.URL;
-  const githubUser = config.GITHUB.USER;
-  const githubToken = config.GITHUB.KEY;
+  const outlineUrl = process.env.OUTLINE_URL!;
+  const outlineApikey = process.env.OUTLINE_API_KEY!;
+  const outlineCollectionid = process.env.OUTLINE_COLLECTION_ID!;
+  const githubRepo = process.env.GITHUB_URL!;
+  const githubUser = process.env.GITHUB_USER!;
+  const githubToken = process.env.GITHUB_KEY!;
+
+  if (!outlineUrl) {
+    await logEntry("fatal", "OUTLINE_URL ENV is not defined");
+  }
+  if (!outlineApikey) {
+    await logEntry("fatal", "OUTLINE_API_KEY ENV is not defined");
+  }
+  if (!outlineCollectionid) {
+    await logEntry("fatal", "OUTLINE_COLLECTION_ID ENV is not defined");
+  }
+  if (!githubRepo) {
+    await logEntry("fatal", "GITHUB_URL ENV is not defined");
+  }
+  if (!githubUser) {
+    await logEntry("fatal", "GITHUB_USER ENVis not defined");
+  }
+  if (!githubToken) {
+    await logEntry("fatal", "GITHUB_KEY ENV is not defined");
+  }
+
   return {
     outlineUrl,
     outlineApikey,
@@ -37,6 +55,9 @@ export async function logEntry(type: string, message: string): Promise<string> {
     case "error":
       line = `${timestamp} - ERROR: ${message}`;
       break;
+    case "fatal":
+      line = `${timestamp} - FATAL: ${message}`;
+      break;
     case "info":
       line = `${timestamp} - INFO: ${message}`;
       break;
@@ -47,6 +68,9 @@ export async function logEntry(type: string, message: string): Promise<string> {
 
   console.log(line);
   writeLogfile(line);
+  if (type === "fatal") {
+    process.exit(1);
+  }
   return line;
 }
 

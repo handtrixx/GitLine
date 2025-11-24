@@ -10,6 +10,7 @@ import {
 import { githubCommitAndPush } from "@/app/lib/github";
 
 export async function GET(_req: NextRequest) {
+  
   let output: string;
   const result = {
     steps: [] as string[],
@@ -19,7 +20,6 @@ export async function GET(_req: NextRequest) {
   output = await logEntry("init", "Starting Outline export process...");
   result.steps.push(output);
   const config = await getConfig();
-  console.log(config);
   output = await logEntry("success", "Configuration loaded");
   result.steps.push(output);
   
