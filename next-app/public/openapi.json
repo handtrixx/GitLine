@@ -1,0 +1,104 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "GitLine API",
+    "description": "The GitLine API.",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/api/v2/todos": {
+      "get": {
+        "operationId": "getTodos",
+        "responses": {
+          "200": {
+            "description": "Response for status 200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTodos200ResponseBody"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occurred, trying again might help.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorMessage" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createTodo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateTodoRequestBody" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Response for status 201",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTodo201ResponseBody"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for status 401",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTodo401ResponseBody"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occurred, trying again might help.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorMessage" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateTodo201ResponseBody": { "type": "string" },
+      "CreateTodo401ResponseBody": { "type": "string" },
+      "CreateTodoRequestBody": {
+        "type": "object",
+        "properties": { "name": { "type": "string" } },
+        "required": ["name"]
+      },
+      "ErrorMessage": {
+        "type": "object",
+        "properties": { "message": { "type": "string" } },
+        "additionalProperties": false
+      },
+      "GetTodos200ResponseBody": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "number" },
+            "name": { "type": "string" },
+            "completed": { "type": "boolean" }
+          },
+          "required": ["id", "name", "completed"],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

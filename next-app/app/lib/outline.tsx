@@ -80,7 +80,25 @@ export async function outlineExtractArchive() {
   return directory;
 }
 
-export async function outlineCleanExport(id: string) {
+export async function outlineCleanExport(id: string, outlineUrl: string, outlineApikey: string) {
+
+  const response = await fetch(
+    outlineUrl + "/api/fileOperations.delete",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + outlineApikey,
+      },
+      body: JSON.stringify({ id: id }),
+    }
+  );
+  console.log(response);
+  if (response.status != 200) {
+    return { success: false, message: "Could not find provided fileid." };
+  }
+
+
   const tempPath = path.join(process.cwd(), "temp");
   const filePath = path.join(tempPath, `download_${id}.zip`);
 
@@ -91,4 +109,8 @@ export async function outlineCleanExport(id: string) {
   if (fs.existsSync(tempPath)) {
     fs.rmSync(tempPath, { recursive: true, force: true });
   }
+
+  return { success: true, message: "Cleanup completed successfully." };
 }
+
+

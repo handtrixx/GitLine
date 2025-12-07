@@ -68,7 +68,7 @@ export async function GET(_req: NextRequest) {
   console.log(git);
   */
   // Cleanup Temporary Files
-  const cleanup = await outlineCleanExport(exportFileId);
+  const cleanup = await outlineCleanExport(exportFileId,config.outlineUrl,config.outlineApikey,);
   
   return Response.json(result);
 }

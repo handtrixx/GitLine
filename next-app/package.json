@@ -1,30 +1,45 @@
 {
-  "name": "outlinehub",
+  "name": "gitline",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 80",
     "build": "next build",
     "start": "next start -p 80",
-    "lint": "eslint"
+    "lint": "eslint",
+    "apigen": "NODE_OPTIONS='--import=tsx' next-rest-framework generate",
+    "apival": "NODE_OPTIONS='--import=tsx' next-rest-framework validate"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.940.0",
-    "next": "^16.0.5",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "@auth/core": "0.41.0",
+    "@aws-sdk/client-s3": "^3.946.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@fontsource/roboto": "^5.2.9",
+    "@mui/icons-material": "^7.3.6",
+    "@mui/material": "^7.3.6",
+    "@mui/material-nextjs": "^7.3.6",
+    "bcrypt": "^6.0.0",
+    "next": "^16.0.7",
+    "next-auth": "5.0.0-beta.30",
+    "next-rest-framework": "^6.1.0",
+    "react": "latest",
+    "react-dom": "latest",
     "simple-git": "^3.30.0",
-    "unzipper": "^0.12.3"
+    "tsx": "^4.21.0",
+    "unzipper": "^0.12.3",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
-    "@types/node": "^20.19.25",
+    "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/unzipper": "^0.10.11",
     "babel-plugin-react-compiler": "1.0.0",
+    "baseline-browser-mapping": "^2.9.4",
     "eslint": "^9.39.1",
-    "eslint-config-next": "16.0.3",
+    "eslint-config-next": "^16.0.7",
     "typescript": "^5.9.3"
   },
-  "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b"
+  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
 }
