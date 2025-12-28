@@ -1,0 +1,6 @@
+services:
+  gitline:
+    build: ./src
+    container_name: gitline
+    restart: unless-stopped
+    env_file: .env
